@@ -28,53 +28,63 @@ include ('header.php');
 		</div>
 		<div class="x_content">
 		<div class="row">
+		<!--div for table column -->
 		<div class="col-sm-12">
 		<div class="card-box table-responsive">
-		
+
 		<table id="table_ack" class="exportTable table table-striped table-bordered" style="width:100%">
 							<thead>
 								<tr>
 									<th>Host Name</th>
 									<th>Interface</th>
 									<th>Description</th>
-									<th>Down Time</th>
-									<th>Action</th>
+									<th>Status</th>
+							<th class="js-not-exportable">Action</th>
 
-								</tr>
-								<tr id="filters">
-									<th>Host Name</th>
-									<th>Interface</th>
-									<th>Description</th>
-									<th>Down Time</th>
-									<th>Action</th>	
+						<!-- </tr>
+							<tr id="filters">
+							<th class="filterhead">Host Name</th>
+							<th class="filterhead">Interface</th>
+							<th class="filterhead">Description</th>
+							<th class="filterhead">Status</th>
+							<th class="filterhead"></th>	
 
-								</tr>
+								</tr>  -->
 
 
 	</thead>
 
 
 							<tbody>
-							<?php
-							$result = $con->query("
-							select hostname,interface,description,downtime,assign,remark,status from tbl_host h JOIN tbl_node n ON h.id=n.hid JOIN tbl_ack a ON n.id=a.nid;
-							");
-							while($row = mysqli_fetch_array($result))
-							{
-							echo "<tr style='background-color:#ff8378'>";
-								echo "<td>".$row['hostname']."</td>";
-								echo "<td>".$row['interface']."</td>";
-								echo "<td>".$row['description']."</td>";
-								echo "<td>".$row['downtime']."</td>";
-								echo "<td>
-									<div class='btn-group mr-2' role='group' aria-label='First group'>
-										<a href='#'>Action here</a>
-									</div>
-								</td>";
-								echo "</tr>";
-							}
-							mysqli_close($con);
-							?>
+<?php
+$result = $con->query("
+	select hostname,interface,description,node_status from tbl_host h JOIN tbl_node n ON h.id=n.hid JOIN tbl_ack a ON n.id=a.nid;
+");
+
+while($row = mysqli_fetch_array($result))
+{	$stat=$row['node_status']; //node_status is from tbl_ack for acknowlegded nodes.
+
+if ($stat==0){echo "<tr style='color:red;'>";}
+else if ($stat==1){echo "<tr style='color:blue;'>";}
+else {echo "<tr style='color:green;'>";}
+echo "<td>".$row['hostname']."</td>";
+echo "<td>".$row['interface']."</td>";
+echo "<td>".$row['description']."</td>";
+echo "<td>";
+//converting 0=Acknowledged,1= Up but not resolved and 2=Resolved from tbl_ack
+if($stat==0){ echo "Acknowleged";}
+else if($stat==1){echo "Up not resolved";}
+else{echo "Resolved";}
+echo "</td>";
+echo "<td>
+	<center><div class='btn-group mr-2' role='group' aria-label='First group'>
+	<a href='#' class='btn btn-primary' role='button'><span class='glyphicon glyphicon-eye-open' style='color:#ffff' data-toggle='tooltip' title='View Logs'></span></a>
+	</div></center>
+	</td>";
+echo "</tr>";
+}
+mysqli_close($con);
+?>
 							</tbody>
 
 						</table>
@@ -82,12 +92,8 @@ include ('header.php');
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<center>
-				<button id="tbl_export_btn" class="btn btn-primary ml-auto">Export</button>
-<center>
-				</div>
-			</div>
+
+	</div>
 </div>
 
 <?php

@@ -241,48 +241,60 @@ $(document).ready(function() {
 			NProgress.done();
 		});
 	}
-
-
-
-	// For Exporting Button
+	
+	
+	
+	// For Exporting Butto
 	$('#table_ack').DataTable({
        //creating three columns for l=show entries,B=Buttons,f=filter,t=table,p=pagination,i=info
-		"dom": '<"row d-block"<"col-md-4"l><"col-md-4"B><"col-md-4 ml-auto"f>>t<"bottom"pi>',
-		buttons: [
-		{
+	"dom" : "<'row'<'col-sm-12 col-md-5'l><'col-sm-12 col-md-3'B><'col-sm-12 col-md-4'f>>" +
+		"<'row'<'col-sm-12'tr>>" +
+		"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-3'><'col-sm-12 col-md-4'p>>",
+		buttons:[
+			{
 			extend:'csv',
+			text: '<i class="fa fa-file-text-o"></i>',
+			titleAttr: 'CSV',
 			exportOptions:{
-				columns:[0,1,2,3,4]
+				columns:[':visible :not(.js-not-exportable)'],
+				header:true
 			}
 		},
 
 		{
 			extend:'excel',
+			text:'<i class="fa fa-file-excel-o"></i>',
+			titleAttr: 'EXCEL',
 			exportOptions:{
-				columns:[0,1,2,3,4]
+				columns:[':visible :not(.js-not-exportable)'],
+				header:true
 			}
 		},
 		{
 			extend:'pdf',
+			text:'<i class="fa fa-file-pdf-o"></i>',
+		        titleAttr: 'PDF',
 			exportOptions:{
-				columns:[0,1,2,3,4],
-				 rows: ':not(:first)'
+				columns:[':visible :not(.js-not-exportable)'],
+				header:true
 			}
 		},
-		
-			
-
-		        
-			            
-		],
-
-		"pageLength": 20,
+		{
+			extend:'colvis',
+			text:'<i class="fa fa-check-square-o"></i>',
+			titleAttr:'Select Columns'
+		}
+	],
+      
+		            
+		"pageLength": 10,
 		"fixedHeader":true,
 //api for custom search every columns
-      
+    /*  
 	initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
+		if (column.index()!=4){
                 var select = $('<select><option value=""></option></select>')
                     .appendTo( $(column.header()).empty() )
                     .on( 'change', function () {
@@ -298,8 +310,9 @@ $(document).ready(function() {
                 column.data().unique().sort().each( function ( d, j ) {
                     select.append( '<option value="'+d+'">'+d+'</option>' )
                 } );
+		}
             } );
-        }
+        }*/
 //api ends here
-	});
+//	});
 });

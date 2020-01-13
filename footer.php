@@ -11,7 +11,7 @@
 				<!-- /footer content -->
 			</div>
 		</div>
-		
+
 		<!-- jQuery -->
 		<script src="vendors/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap -->
@@ -50,13 +50,17 @@
 		<script src="vendors/moment/min/moment.min.js"></script>
 		<script src="vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 	 <!-- for data tables-->
-	 	<script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+		<script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 		<script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 		<script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 		<script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
 		<script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
 		<script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
 		<script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+
+		<!--Script for column visibilty -->
+		<script src="vendors/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+		<!-- Colvis ends  -->
 		<script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 		<script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
 		<script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
@@ -72,6 +76,6 @@
 		<script src="build/js/custom.min.js"></script>
 		<!-- delete the below line -->
 		<script src="src/js/custom.js"></script>
-	
+
 	</body>
 </html>
